@@ -10,12 +10,21 @@ namespace Soenneker.Dtos.Entities;
 [PublicOpenApiObject]
 public class EntityDto
 {
+    /// <summary>
+    /// Gets or sets id.
+    /// </summary>
     [JsonPropertyName("id")]
     public virtual string Id { get; set; } = null!;
 
+    /// <summary>
+    /// Gets or sets created at.
+    /// </summary>
     [JsonPropertyName("createdAt")]
     public virtual DateTimeOffset CreatedAt { get; set; }
 
+    /// <summary>
+    /// Gets or sets modified at.
+    /// </summary>
     [JsonPropertyName("modifiedAt")]
     public virtual DateTimeOffset? ModifiedAt { get; set; }
 }
