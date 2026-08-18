@@ -5,25 +5,25 @@ using System.Text.Json.Serialization;
 namespace Soenneker.Dtos.Entities;
 
 /// <summary>
-/// A hard type mapping to Entity
+/// Provides the stable identifier and creation or modification timestamps shared by entity data-transfer objects.
 /// </summary>
 [PublicOpenApiObject]
 public class EntityDto
 {
     /// <summary>
-    /// Gets or sets id.
+    /// Stable unique identifier of the resource.
     /// </summary>
     [JsonPropertyName("id")]
     public virtual string Id { get; set; } = null!;
 
     /// <summary>
-    /// Gets or sets created at.
+    /// UTC timestamp when the resource was created.
     /// </summary>
     [JsonPropertyName("createdAt")]
     public virtual DateTimeOffset CreatedAt { get; set; }
 
     /// <summary>
-    /// Gets or sets modified at.
+    /// UTC timestamp when the resource was last modified, or <see langword="null"/> when it has not been updated.
     /// </summary>
     [JsonPropertyName("modifiedAt")]
     public virtual DateTimeOffset? ModifiedAt { get; set; }
