@@ -5,22 +5,43 @@
 
 # Soenneker.Dtos.Entities
 
-Provides the stable identifier and creation or modification timestamps shared by entity data-transfer objects.
+Provides a reusable entity DTO base with an identifier and creation/modification timestamps.
 
-## Install
+## Installation
 
 ```bash
 dotnet add package Soenneker.Dtos.Entities
 ```
 
-## What you get
+## Usage
 
-- `EntityDto` — Provides the stable identifier and creation or modification timestamps shared by entity data-transfer objects.
+```csharp
+using Soenneker.Dtos.Entities;
 
-## API at a glance
+public sealed class CustomerDto : EntityDto
+{
+    public string Email { get; set; } = null!;
+}
 
-| API | What it does | Result / important behavior |
+var customer = new CustomerDto
+{
+    Id = "customer-42",
+    CreatedAt = DateTimeOffset.UtcNow,
+    ModifiedAt = null,
+    Email = "ada@example.com"
+};
+```
+
+System.Text.Json maps the inherited properties to:
+
+| Property | JSON name | Initial value |
 | --- | --- | --- |
-| `EntityDto.Id` | Stable unique identifier of the resource. | Stable unique identifier of the resource. |
-| `EntityDto.CreatedAt` | UTC timestamp when the resource was created. | UTC timestamp when the resource was created. |
-| `EntityDto.ModifiedAt` | UTC timestamp when the resource was last modified, or `null` when it has not been updated. | UTC timestamp when the resource was last modified, or `null` when it has not been updated. |
+| `Id` | `id` | Uninitialized |
+| `CreatedAt` | `createdAt` | `default(DateTimeOffset)` |
+| `ModifiedAt` | `modifiedAt` | `null` |
+
+The properties are virtual so specialized DTOs can override them. The class is also marked with `PublicOpenApiObject` for Soenneker OpenAPI discovery.
+
+The model does not generate IDs or timestamps, validate identifier format, or enforce chronological ordering. `DateTimeOffset` can represent offsets other than UTC; use `UtcNow` or normalize values yourself when your API contract requires UTC.
+
+Only System.Text.Json property-name attributes are declared. Newtonsoft.Json naming follows the caller’s serializer settings.

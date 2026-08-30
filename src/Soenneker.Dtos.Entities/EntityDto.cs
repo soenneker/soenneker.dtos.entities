@@ -17,13 +17,13 @@ public class EntityDto
     public virtual string Id { get; set; } = null!;
 
     /// <summary>
-    /// UTC timestamp when the resource was created.
+    /// Timestamp when the resource was created.
     /// </summary>
     [JsonPropertyName("createdAt")]
     public virtual DateTimeOffset CreatedAt { get; set; }
 
     /// <summary>
-    /// UTC timestamp when the resource was last modified, or <see langword="null"/> when it has not been updated.
+    /// Timestamp when the resource was last modified, or <see langword="null"/> when it has not been updated.
     /// </summary>
     [JsonPropertyName("modifiedAt")]
     public virtual DateTimeOffset? ModifiedAt { get; set; }
