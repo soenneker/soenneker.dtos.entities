@@ -43,5 +43,3 @@ System.Text.Json maps the inherited properties to:
 The properties are virtual so specialized DTOs can override them. The class is also marked with `PublicOpenApiObject` for Soenneker OpenAPI discovery.
 
 The model does not generate IDs or timestamps, validate identifier format, or enforce chronological ordering. `DateTimeOffset` can represent offsets other than UTC; use `UtcNow` or normalize values yourself when your API contract requires UTC.
-
-Only System.Text.Json property-name attributes are declared. Newtonsoft.Json naming follows the caller’s serializer settings.
